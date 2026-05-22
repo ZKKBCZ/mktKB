@@ -679,6 +679,27 @@ function isCorrect(input, title) {
   return false;
 }
 
+function isBonusCorrect(input, book) {
+  // Přesná shoda nebo shoda podtitulu za dvojtečkou
+  if (isCorrect(input, book.title)) return true;
+  if (!book.seriesName) return false;
+
+  // Vyřízni část titulu unikátní pro tento díl (bez prefixu série)
+  const nTitle  = normalize(book.title);
+  const nSeries = normalize(book.seriesName);
+  if (!nTitle.startsWith(nSeries)) return false;
+
+  let uniquePart = nTitle.slice(nSeries.length).trim();
+  // Odstraň spojky jako ":", "-", "a ", "i " na začátku
+  uniquePart = uniquePart.replace(/^[:\-]+\s*/, '').replace(/^(a|i)\s+/, '').trim();
+  if (!uniquePart) return false;
+
+  // Vstup musí obsahovat všechna klíčová slova unikátní části
+  const ni = normalize(input);
+  const words = uniquePart.split(' ').filter(w => w.length > 1);
+  return words.length > 0 && words.every(w => ni.includes(w));
+}
+
 /* ═══════════════════════════════════════════════
    RENDER
    ═══════════════════════════════════════════════ */
@@ -814,7 +835,7 @@ function submitBonus() {
   const val  = document.getElementById('bonusInput').value.trim();
   if (!val) return;
   const book = BOOKS[state.bookIdx];
-  if (isCorrect(val, book.title)) state.platinumWon = true;
+  if (isBonusCorrect(val, book)) state.platinumWon = true;
   finishBonus();
 }
 
