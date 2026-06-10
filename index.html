@@ -1360,40 +1360,52 @@ function renderProfileTab() {
 }
 
 /* ─── RENDER: ODZNÁČKY ─── */
+let achieveShowAll = false;
+
 function renderAchievementsTab() {
   const stats    = getStats();
   const unlocked = new Set(stats.achievements || []);
 
-  // Základní achievementy
-  let html = '<div class="achieve-grid">';
+  // Sestav všechny karty
+  const cards = [];
   for (const a of ACHIEVEMENTS_DEF) {
     const isUnlocked = unlocked.has(a.id);
-    html += `
+    cards.push(`
       <div class="achieve-card ${isUnlocked ? 'unlocked' : 'locked'}">
         <div class="achieve-icon">${a.icon}</div>
         <div>
           <div class="achieve-name">${a.name}</div>
           <div class="achieve-desc">${isUnlocked ? '✓ Odemčeno' : a.desc}</div>
         </div>
-      </div>`;
+      </div>`);
   }
-
-  // Žánroví specialisté
   for (const [genre, levels] of Object.entries(GENRE_ACHIEVEMENTS)) {
     for (const [count, [id, name]] of Object.entries(levels)) {
       const isUnlocked = unlocked.has(id);
-      html += `
+      cards.push(`
         <div class="achieve-card ${isUnlocked ? 'unlocked' : 'locked'}">
           <div class="achieve-icon">📚</div>
           <div>
             <div class="achieve-name">${name}</div>
             <div class="achieve-desc">${isUnlocked ? '✓ Odemčeno' : `Uhodni ${count} knih žánru ${genre}`}</div>
           </div>
-        </div>`;
+        </div>`);
     }
   }
-  html += '</div>';
-  document.getElementById('tabAchievements').innerHTML = html;
+
+  const PREVIEW = Math.ceil(cards.length / 3);
+  const visible = achieveShowAll ? cards : cards.slice(0, PREVIEW);
+  const btn     = achieveShowAll
+    ? `<button class="btn-outline" style="margin-top:12px;" onclick="toggleAchievements()">Zobrazit méně ↑</button>`
+    : `<button class="btn-outline" style="margin-top:12px;" onclick="toggleAchievements()">Zobrazit vše (${cards.length}) ↓</button>`;
+
+  document.getElementById('tabAchievements').innerHTML =
+    `<div class="achieve-grid">${visible.join('')}</div>${btn}`;
+}
+
+function toggleAchievements() {
+  achieveShowAll = !achieveShowAll;
+  renderAchievementsTab();
 }
 
 /* ─── RENDER: ŽEBŘÍČEK ─── */
@@ -1426,7 +1438,7 @@ function renderLeaderboardTab() {
       <div class="lb-row${rowClass}">
         <div class="lb-pos${posClass}">${pos}.</div>
         <div class="lb-name">${p.name}${p.isYou ? ' 👈' : ''}</div>
-        <div><span class="lb-score">${p.won}</span> <span class="lb-score-label">výher</span></div>
+        <div><span class="lb-score">${p.won}</span> <span class="lb-score-label">bodů</span></div>
       </div>`;
   });
   document.getElementById('tabLeaderboard').innerHTML = html;
