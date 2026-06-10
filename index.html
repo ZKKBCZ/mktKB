@@ -203,6 +203,113 @@
     .countdown-row { font-size: 13px; color: var(--gray-400); }
     .countdown-value { font-weight: 700; color: var(--text); }
 
+    /* ─── NAME OVERLAY ─── */
+    .name-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.55);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 100; padding: 20px;
+    }
+    .name-box {
+      background: #fff; border-radius: var(--radius);
+      padding: 32px 28px; width: 100%; max-width: 380px;
+      text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    }
+    .name-box-emoji { font-size: 40px; margin-bottom: 12px; }
+    .name-box-title { font-size: 20px; font-weight: 800; margin-bottom: 6px; }
+    .name-box-sub { font-size: 14px; color: var(--gray-600); margin-bottom: 20px; }
+    .name-box .text-input { width: 100%; margin-bottom: 12px; }
+    .name-box .btn-primary { width: 100%; padding: 13px; font-size: 15px; }
+
+    /* ─── PROFILE SEKCE ─── */
+    .profile-wrap {
+      margin-top: 32px;
+      border-top: 2px solid var(--gray-200);
+      padding-top: 24px;
+    }
+    .profile-header {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+    }
+    .profile-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--green-700); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 800; flex-shrink: 0;
+    }
+    .profile-name { font-size: 17px; font-weight: 800; }
+    .profile-streak { font-size: 13px; color: var(--gray-600); }
+
+    .profile-tabs {
+      display: flex; gap: 6px; margin-bottom: 20px;
+    }
+    .tab-btn {
+      flex: 1; background: #fff; border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius-sm); padding: 9px 6px;
+      font-size: 13px; font-weight: 600; font-family: inherit;
+      cursor: pointer; color: var(--gray-600); transition: all 0.15s;
+    }
+    .tab-btn.active { background: var(--green-900); color: #fff; border-color: var(--green-900); }
+    .tab-btn:hover:not(.active) { background: var(--gray-200); }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* Stats */
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px;
+    }
+    .stat-box {
+      background: #fff; border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius); padding: 14px 10px; text-align: center;
+    }
+    .stat-num { font-size: 24px; font-weight: 800; color: var(--green-700); }
+    .stat-label { font-size: 11px; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+
+    /* Medal calendar */
+    .calendar-title { font-size: 13px; font-weight: 700; color: var(--gray-600); margin-bottom: 10px; }
+    .medal-strip { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 20px; }
+    .medal-day {
+      width: 30px; height: 30px; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; border: 1.5px solid transparent;
+      position: relative; cursor: default;
+    }
+    .medal-day.platinum { background: linear-gradient(135deg,#F5C330,#E09000); }
+    .medal-day.gold     { background: var(--yellow-bg); border-color: var(--yellow); }
+    .medal-day.bronze   { background: #FFF0EE; border-color: #FECDCA; }
+    .medal-day.empty    { background: var(--gray-200); }
+    .medal-day.today    { box-shadow: 0 0 0 2px var(--green-700); }
+
+    /* Achievements */
+    .achieve-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+    }
+    .achieve-card {
+      background: #fff; border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius); padding: 14px;
+      display: flex; gap: 12px; align-items: flex-start;
+    }
+    .achieve-card.unlocked { border-color: var(--yellow); background: var(--yellow-bg); }
+    .achieve-icon { font-size: 24px; flex-shrink: 0; line-height: 1; }
+    .achieve-name { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+    .achieve-desc { font-size: 11px; color: var(--gray-400); line-height: 1.4; }
+    .achieve-card.locked { opacity: 0.5; filter: grayscale(1); }
+    .achieve-card.locked .achieve-icon::after { content: '🔒'; font-size: 10px; position: relative; top: -8px; left: -4px; }
+
+    /* Leaderboard */
+    .lb-section-title { font-size: 13px; font-weight: 700; color: var(--gray-600); margin-bottom: 10px; }
+    .lb-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px; background: #fff;
+      border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm);
+      margin-bottom: 6px; font-size: 14px;
+    }
+    .lb-row.lb-you { border-color: var(--green-700); background: var(--green-100); font-weight: 700; }
+    .lb-pos { width: 26px; font-weight: 800; color: var(--gray-400); flex-shrink: 0; }
+    .lb-pos.top3 { color: var(--yellow); }
+    .lb-name { flex: 1; }
+    .lb-score { font-weight: 700; color: var(--green-700); }
+    .lb-score-label { font-size: 11px; color: var(--gray-400); }
+
     /* Testovací tlačítko */
     .dev-divider {
       margin-top: 40px;
@@ -263,10 +370,40 @@
   <div class="bonus-section" id="bonusSection" style="display:none;"></div>
   <div class="result-card" id="resultCard"></div>
 
+  <!-- Profil sekce -->
+  <div class="profile-wrap" id="profileWrap" style="display:none;">
+    <div class="profile-header">
+      <div class="profile-avatar" id="profileAvatar">?</div>
+      <div>
+        <div class="profile-name" id="profileNameDisplay">–</div>
+        <div class="profile-streak" id="profileStreakDisplay"></div>
+      </div>
+    </div>
+    <div class="profile-tabs">
+      <button class="tab-btn active" id="tabBtnProfile"      onclick="switchTab('profile')">👤 Profil</button>
+      <button class="tab-btn"        id="tabBtnAchievements" onclick="switchTab('achievements')">🏆 Odznáčky</button>
+      <button class="tab-btn"        id="tabBtnLeaderboard"  onclick="switchTab('leaderboard')">📊 Žebříček</button>
+    </div>
+    <div id="tabProfile"      class="tab-content active"></div>
+    <div id="tabAchievements" class="tab-content"></div>
+    <div id="tabLeaderboard"  class="tab-content"></div>
+  </div>
+
   <!-- Testovací tlačítko -->
   <div class="dev-divider">
     <div class="dev-label">Testování prototypu</div>
     <button class="btn-dev" onclick="nextDay()">🌙 Probudit se zítra</button>
+  </div>
+</div>
+
+<!-- Name overlay -->
+<div class="name-overlay" id="nameOverlay" style="display:none;">
+  <div class="name-box">
+    <div class="name-box-emoji">📚</div>
+    <div class="name-box-title">Ahoj! Jak ti máme říkat?</div>
+    <div class="name-box-sub">Jméno se zobrazí v žebříčku hráčů</div>
+    <input id="nameInput" class="text-input" type="text" placeholder="Jméno nebo přezdívka…" maxlength="20" autocomplete="off">
+    <button class="btn btn-primary" onclick="confirmName()">Začít hrát →</button>
   </div>
 </div>
 
@@ -993,6 +1130,8 @@ function renderResult() {
 
   card.classList.add('visible');
   startCountdown();
+  recordGameResult();
+  refreshProfile();
 }
 
 function shareResult() {
@@ -1056,6 +1195,270 @@ function loadState() {
 }
 
 /* ═══════════════════════════════════════════════
+   UŽIVATELSKÝ PROFIL & STATISTIKY
+   ═══════════════════════════════════════════════ */
+const CZECH_AUTHORS = ['Božena Němcová', 'Ota Pavel', 'Milan Kundera'];
+
+function getUser() {
+  try { return JSON.parse(localStorage.getItem('kb_user') || 'null'); } catch(e) { return null; }
+}
+function setUser(name) {
+  localStorage.setItem('kb_user', JSON.stringify({ name }));
+}
+
+function emptyStats() {
+  return { played: 0, won: 0, platinum: 0, streak: 0, bestStreak: 0,
+           lastPlayedDay: -1, hint1Wins: 0, perfectWins: 0, czechWins: 0,
+           genreWins: {}, achievements: [] };
+}
+function getStats() {
+  try { return { ...emptyStats(), ...JSON.parse(localStorage.getItem('kb_stats') || '{}') }; }
+  catch(e) { return emptyStats(); }
+}
+function saveStats(s) {
+  try { localStorage.setItem('kb_stats', JSON.stringify(s)); } catch(e) {}
+}
+
+function getMedal(dayNum) {
+  return localStorage.getItem('kb_medal_' + dayNum) || null;
+}
+function saveMedal(dayNum, medal) {
+  try { localStorage.setItem('kb_medal_' + dayNum, medal); } catch(e) {}
+}
+
+function recordGameResult() {
+  const dayNum = getDayNumber();
+  const stats  = getStats();
+  if (stats.lastPlayedDay === dayNum) return; // již zaznamenáno
+
+  const book   = BOOKS[state.bookIdx];
+  const played = (state.wrongGuesses.length > 0) || state.won || state.platinumWon || state.gaveUp;
+  if (!played) return;
+
+  // Medaile
+  let medal = 'bronze';
+  if (state.platinumWon) medal = 'platinum';
+  else if (state.won)    medal = 'gold';
+  saveMedal(dayNum, medal);
+
+  // Statistiky
+  stats.played++;
+  if (state.won || state.platinumWon) {
+    stats.won++;
+    const genre = book.hints[1].value;
+    stats.genreWins[genre] = (stats.genreWins[genre] || 0) + 1;
+    if (state.revealed === 1 && state.wrongGuesses.length === 0) stats.hint1Wins++;
+    if (state.wrongGuesses.length === 0) stats.perfectWins++;
+    if (CZECH_AUTHORS.includes(book.author)) stats.czechWins++;
+  }
+  if (state.platinumWon) stats.platinum++;
+
+  // Série
+  if (stats.lastPlayedDay === dayNum - 1) stats.streak++;
+  else stats.streak = 1;
+  stats.bestStreak   = Math.max(stats.bestStreak, stats.streak);
+  stats.lastPlayedDay = dayNum;
+
+  // Achievementy
+  stats.achievements = checkAchievements(stats);
+  saveStats(stats);
+}
+
+/* ─── ACHIEVEMENTY ─── */
+const ACHIEVEMENTS_DEF = [
+  { id: 'first_step',   icon: '🐣', name: 'První krok',                      desc: 'Odehraj svoji první hru',           check: s => s.played >= 1 },
+  { id: 'zavislost',    icon: '🔥', name: 'Nová závislost',                   desc: 'Hraj 10 dní v řadě',                check: s => s.streak >= 10 },
+  { id: 'nen_uniku',    icon: '🔥', name: 'Není úniku',                       desc: 'Hraj 30 dní v řadě',                check: s => s.streak >= 30 },
+  { id: 'diagnoza',     icon: '🔥', name: 'Diagnóza: Knihobot',               desc: 'Hraj 100 dní v řadě',               check: s => s.streak >= 100 },
+  { id: 'katalog',      icon: '🎯', name: 'Mozek jak katalog',                desc: 'Uhodni 10 dní v řadě',              check: s => s.wonStreak >= 10 },
+  { id: 'telepatia',    icon: '🎯', name: 'Knižní telepatie',                 desc: 'Uhodni 30 dní v řadě',              check: s => s.wonStreak >= 30 },
+  { id: 'nahoda',       icon: '📖', name: 'Tohle není náhoda',                desc: 'Uhodni 10 knih celkem',             check: s => s.won >= 10 },
+  { id: 'precetl',      icon: '📚', name: 'Vážně sis přečetl/a tolik knih?', desc: 'Uhodni 50 knih celkem',             check: s => s.won >= 50 },
+  { id: 'wikipedia',    icon: '🧠', name: 'Živá Wikipedia',                   desc: 'Uhodni 100 knih celkem',            check: s => s.won >= 100 },
+  { id: 'sер_zav',      icon: '💎', name: 'Sériová závislost',                desc: 'Získej první platinovou medaili',   check: s => s.platinum >= 1 },
+  { id: 'arie_serie',   icon: '💎', name: 'Árie na série',                    desc: 'Získej 10 platinových medailí',     check: s => s.platinum >= 10 },
+  { id: 'jasnovidec',   icon: '🔮', name: 'Jasnovidec',                       desc: 'Uhodni na 1. nápovědu',             check: s => s.hint1Wins >= 1 },
+  { id: 'mentalista',   icon: '🔮', name: 'Mentalista',                       desc: 'Uhodni na 1. nápovědu 5×',          check: s => s.hint1Wins >= 5 },
+  { id: 'posledni',     icon: '⏱️', name: 'Na poslední chvíli',               desc: 'Uhodni až na 5. nápovědu',          check: s => s.lastHintWin >= 1 },
+  { id: 'perfekt',      icon: '✨', name: 'Perfekcionista',                   desc: 'Uhodni bez jediného špatného tipu', check: s => s.perfectWins >= 1 },
+  { id: 'klasik',       icon: '📜', name: 'Klasik',                           desc: 'Uhodni knihu vydanou před rokem 1900', check: s => s.classicWins >= 1 },
+  { id: 'vlastenec',    icon: '🇨🇿', name: 'Vlastenec',                       desc: 'Uhodni 5 českých knih',             check: s => s.czechWins >= 5 },
+  { id: 'rok_s_kb',     icon: '📅', name: 'Rok s Knihobotem',                 desc: '365 dní odehráno (nemusí být v řadě)', check: s => s.played >= 365 },
+];
+
+const GENRE_ACHIEVEMENTS = {
+  'Fantasy':            { 5: ['g_fan5',  'Učedník magie'],       10: ['g_fan10',  'Čaroděj'],              50: ['g_fan50',  'Pán světů'] },
+  'Sci-fi':             { 5: ['g_sci5',  'Astronaut v křesle'],  10: ['g_sci10',  'Vesmírný průzkumník'],  50: ['g_sci50',  'Galaktický génius'] },
+  'Thriller':           { 5: ['g_thr5',  'Detektiv z gauče'],    10: ['g_thr10',  'Stopař záhad'],         50: ['g_thr50',  'Mistr napětí'] },
+  'Romance':            { 5: ['g_rom5',  'Romantická duše'],     10: ['g_rom10',  'Srdce na dlani'],       50: ['g_rom50',  'Věčný romantik'] },
+  'Dystopie':           { 5: ['g_dys5',  'Rebel'],               10: ['g_dys10',  'Odpůrce systému'],      50: ['g_dys50',  'Vizionář'] },
+  'Historická próza':   { 5: ['g_his5',  'Kronikář'],            10: ['g_his10',  'Historik'],             50: ['g_his50',  'Živá encyklopedie'] },
+  'Magický realismus':  { 5: ['g_mag5',  'Snílek'],              10: ['g_mag10',  'Tkáč iluzí'],           50: ['g_mag50',  'Mistr snů'] },
+  'Literární fikce':    { 5: ['g_lit5',  'Čtenář'],              10: ['g_lit10',  'Literát'],              50: ['g_lit50',  'Milovník slov'] },
+  'Psychologická fikce':{ 5: ['g_psy5',  'Analytik'],            10: ['g_psy10',  'Psycholog z gauče'],    50: ['g_psy50',  'Lidská záhada'] },
+};
+
+function checkAchievements(stats) {
+  const unlocked = new Set(stats.achievements || []);
+  for (const a of ACHIEVEMENTS_DEF) {
+    if (!unlocked.has(a.id) && a.check(stats)) unlocked.add(a.id);
+  }
+  for (const [genre, levels] of Object.entries(GENRE_ACHIEVEMENTS)) {
+    const wins = stats.genreWins[genre] || 0;
+    for (const [count, [id]] of Object.entries(levels)) {
+      if (!unlocked.has(id) && wins >= parseInt(count)) unlocked.add(id);
+    }
+  }
+  return [...unlocked];
+}
+
+/* ─── TABS ─── */
+function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+
+function switchTab(tab) {
+  ['profile','achievements','leaderboard'].forEach(t => {
+    document.getElementById('tab'    + cap(t)).classList.toggle('active', t === tab);
+    document.getElementById('tabBtn' + cap(t)).classList.toggle('active', t === tab);
+  });
+  if (tab === 'profile')      renderProfileTab();
+  if (tab === 'achievements') renderAchievementsTab();
+  if (tab === 'leaderboard')  renderLeaderboardTab();
+}
+
+/* ─── RENDER: PROFIL ─── */
+function renderProfileTab() {
+  const stats  = getStats();
+  const dayNum = getDayNumber();
+
+  // Stats grid
+  const avgHints = stats.won > 0 ? (stats.hintsSum / stats.won).toFixed(1) : '–';
+  const winRate  = stats.played > 0 ? Math.round(stats.won / stats.played * 100) + '%' : '–';
+
+  let statsHTML = `
+    <div class="stats-grid">
+      <div class="stat-box"><div class="stat-num">${stats.streak}</div><div class="stat-label">🔥 Řada</div></div>
+      <div class="stat-box"><div class="stat-num">${stats.won}</div><div class="stat-label">🥇 Výher</div></div>
+      <div class="stat-box"><div class="stat-num">${winRate}</div><div class="stat-label">🎯 Úspěšnost</div></div>
+      <div class="stat-box"><div class="stat-num">${stats.played}</div><div class="stat-label">📅 Odehráno</div></div>
+      <div class="stat-box"><div class="stat-num">${stats.bestStreak}</div><div class="stat-label">🏆 Nejdelší řada</div></div>
+      <div class="stat-box"><div class="stat-num">${stats.platinum}</div><div class="stat-label">💎 Platina</div></div>
+    </div>`;
+
+  // Medal calendar — posledních 28 dní
+  const MEDAL_EMOJI = { platinum: '💎', gold: '🥇', bronze: '🔶' };
+  let calHTML = '<div class="calendar-title">Posledních 28 dní</div><div class="medal-strip">';
+  for (let i = 27; i >= 0; i--) {
+    const d   = dayNum - i;
+    const med = getMedal(d);
+    const cls = med ? med : 'empty';
+    const isToday = i === 0 ? ' today' : '';
+    calHTML += `<div class="medal-day ${cls}${isToday}" title="${med ? MEDAL_EMOJI[med] : '–'}">${med ? MEDAL_EMOJI[med] : ''}</div>`;
+  }
+  calHTML += '</div>';
+
+  document.getElementById('tabProfile').innerHTML = statsHTML + calHTML;
+}
+
+/* ─── RENDER: ODZNÁČKY ─── */
+function renderAchievementsTab() {
+  const stats    = getStats();
+  const unlocked = new Set(stats.achievements || []);
+
+  // Základní achievementy
+  let html = '<div class="achieve-grid">';
+  for (const a of ACHIEVEMENTS_DEF) {
+    const isUnlocked = unlocked.has(a.id);
+    html += `
+      <div class="achieve-card ${isUnlocked ? 'unlocked' : 'locked'}">
+        <div class="achieve-icon">${a.icon}</div>
+        <div>
+          <div class="achieve-name">${a.name}</div>
+          <div class="achieve-desc">${isUnlocked ? '✓ Odemčeno' : a.desc}</div>
+        </div>
+      </div>`;
+  }
+
+  // Žánroví specialisté
+  for (const [genre, levels] of Object.entries(GENRE_ACHIEVEMENTS)) {
+    for (const [count, [id, name]] of Object.entries(levels)) {
+      const isUnlocked = unlocked.has(id);
+      html += `
+        <div class="achieve-card ${isUnlocked ? 'unlocked' : 'locked'}">
+          <div class="achieve-icon">📚</div>
+          <div>
+            <div class="achieve-name">${name}</div>
+            <div class="achieve-desc">${isUnlocked ? '✓ Odemčeno' : `Uhodni ${count} knih žánru ${genre}`}</div>
+          </div>
+        </div>`;
+    }
+  }
+  html += '</div>';
+  document.getElementById('tabAchievements').innerHTML = html;
+}
+
+/* ─── RENDER: ŽEBŘÍČEK ─── */
+function renderLeaderboardTab() {
+  const stats    = getStats();
+  const user     = getUser();
+  const userName = user ? user.name : 'Ty';
+
+  // Mock hráči + reálný uživatel
+  const mockPlayers = [
+    { name: 'Martin H.',  won: 42, hints: 87 },
+    { name: 'Tereza N.',  won: 38, hints: 79 },
+    { name: 'Jakub M.',   won: 35, hints: 74 },
+    { name: 'Eliška K.',  won: 31, hints: 65 },
+    { name: 'Ondřej P.',  won: 28, hints: 58 },
+    { name: 'Lucie B.',   won: 24, hints: 51 },
+    { name: 'Tomáš V.',   won: 19, hints: 42 },
+  ];
+
+  const realPlayer = { name: userName, won: stats.won, hints: stats.hintsSum || 0, isYou: true };
+  const all = [...mockPlayers, realPlayer]
+    .sort((a, b) => b.won !== a.won ? b.won - a.won : a.hints - b.hints);
+
+  let html = '<div class="lb-section-title">Celkové pořadí</div>';
+  all.forEach((p, i) => {
+    const pos     = i + 1;
+    const posClass = pos <= 3 ? ' top3' : '';
+    const rowClass = p.isYou ? ' lb-you' : '';
+    html += `
+      <div class="lb-row${rowClass}">
+        <div class="lb-pos${posClass}">${pos}.</div>
+        <div class="lb-name">${p.name}${p.isYou ? ' 👈' : ''}</div>
+        <div><span class="lb-score">${p.won}</span> <span class="lb-score-label">výher</span></div>
+      </div>`;
+  });
+  document.getElementById('tabLeaderboard').innerHTML = html;
+}
+
+/* ─── REFRESH PROFILU ─── */
+function refreshProfile() {
+  const user = getUser();
+  if (!user) return;
+  const stats = getStats();
+  const el    = document.getElementById('profileNameDisplay');
+  const av    = document.getElementById('profileAvatar');
+  const st    = document.getElementById('profileStreakDisplay');
+  if (el) el.textContent = user.name;
+  if (av) av.textContent = user.name.charAt(0).toUpperCase();
+  if (st) st.textContent = stats.streak > 0
+    ? `🔥 ${stats.streak} dní v řadě`
+    : `Zahraj si první hru!`;
+  document.getElementById('profileWrap').style.display = 'block';
+  renderProfileTab();
+}
+
+/* ─── NAME SETUP ─── */
+function confirmName() {
+  const val = document.getElementById('nameInput').value.trim();
+  if (!val) return;
+  setUser(val);
+  document.getElementById('nameOverlay').style.display = 'none';
+  refreshProfile();
+}
+
+/* ═══════════════════════════════════════════════
    TESTOVACÍ FUNKCE
    ═══════════════════════════════════════════════ */
 function nextDay() {
@@ -1089,6 +1492,15 @@ function init() {
   document.getElementById('guessInput').onkeydown = e => {
     if (e.key === 'Enter') submitGuess();
   };
+
+  // Nameoverlay nebo profil
+  const user = getUser();
+  if (!user) {
+    document.getElementById('nameOverlay').style.display = 'flex';
+    document.getElementById('nameInput').onkeydown = e => { if (e.key === 'Enter') confirmName(); };
+  } else {
+    refreshProfile();
+  }
 
   updateUI();
 }
