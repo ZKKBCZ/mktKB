@@ -1102,7 +1102,7 @@ function renderResult() {
     heading    = 'Výborně!';
     scoreText  = `Uhodl/a jsi na ${state.revealed}. nápovědu!`;
   } else if (state.gaveUp) {
-    emoji      = '🏳️';
+    emoji      = '👻';
     headingCls = 'lose';
     heading    = 'Vzdal/a jsi to!';
     scoreText  = 'Tady jsou všechny nápovědy';
@@ -1347,14 +1347,14 @@ function renderProfileTab() {
     </div>`;
 
   // Medal calendar — posledních 28 dní
-  const MEDAL_EMOJI = { platinum: '💎', gold: '🥇', bronze: '🔶' };
+  const MEDAL_EMOJI = { platinum: '💎', gold: '🥇', bronze: '🎖️' };
   let calHTML = '<div class="calendar-title">Posledních 28 dní</div><div class="medal-strip">';
   for (let i = 27; i >= 0; i--) {
     const d   = dayNum - i;
     const med = getMedal(d);
     const cls = med ? med : 'empty';
     const isToday = i === 0 ? ' today' : '';
-    calHTML += `<div class="medal-day ${cls}${isToday}" title="${med ? MEDAL_EMOJI[med] : '–'}">${med ? MEDAL_EMOJI[med] : ''}</div>`;
+    calHTML += `<div class="medal-day ${cls}${isToday}">${med ? MEDAL_EMOJI[med] : '👻'}</div>`;
   }
   calHTML += '</div>';
 
