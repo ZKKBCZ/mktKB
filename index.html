@@ -1236,10 +1236,12 @@ function recordGameResult() {
   if (!played) return;
 
   // Medaile
-  let medal = 'bronze';
-  if (state.platinumWon) medal = 'platinum';
-  else if (state.won)    medal = 'gold';
-  saveMedal(dayNum, medal);
+  let medal = null;
+  if (state.platinumWon)                              medal = 'platinum';
+  else if (state.won)                                 medal = 'gold';
+  else if (!state.gaveUp && state.wrongGuesses.length > 0) medal = 'bronze';
+  // gaveUp bez hádání → žádná medaile (zobrazí se jako šedé prázdné pole)
+  if (medal) saveMedal(dayNum, medal);
 
   // Statistiky
   stats.played++;
