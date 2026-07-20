@@ -209,23 +209,22 @@
   </header>
 
   <!-- HERO -->
-  <section class="hero">
+  <section class="hero" id="intro">
     <div class="wrap">
-      <span class="badge">Nová aplikace · Waitlist</span>
       <h1>Pomoz nám vytvořit nejlepší aplikaci pro milovníky knih</h1>
       <p class="lead">Spravuj svoji knihovnu, sleduj hodnotu knih a prodávej je jednoduše přes Knihobot.</p>
       <p>Pracujeme na nové aplikaci, která ti umožní mít vlastní knihovnu vždy po ruce.</p>
       <p>Než ji zpřístupníme všem, chceme ji vytvořit společně s lidmi, kteří budou aplikaci opravdu používat.</p>
       <p>Pokud se přidáš na waitlist, získáš přístup mezi prvními a budeš nám pomáhat rozhodovat, co v aplikaci funguje, co chybí a co naopak nemá smysl.</p>
-      <a href="#formular" class="btn">
+      <button type="button" id="start-btn" class="btn">
         <svg class="sparkle" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l1.6 6.4L20 10l-6.4 1.6L12 18l-1.6-6.4L4 10l6.4-1.6L12 2z" fill="#F8DF8B"/></svg>
         Přidat se na waitlist
-      </a>
+      </button>
     </div>
   </section>
 
   <!-- FORM (krokový) -->
-  <section class="form-section" id="formular">
+  <section class="form-section" id="formular" style="display:none;">
     <div class="wrap">
       <div class="card" id="card">
         <div class="stepper">
@@ -238,7 +237,7 @@
           <div class="step active" data-step="1">
             <fieldset>
               <legend>Co by tě na takové aplikaci lákalo nejvíc?</legend>
-              <p class="hint">Vyber maximálně 3. Vybráno: <span class="count" id="count">0</span>/3</p>
+              <p class="hint">Vyber všechno, co tě zajímá – klidně víc možností.</p>
               <div id="features"></div>
               <input type="text" class="other-input" id="other-text" placeholder="Napiš, co jiného by tě lákalo…" maxlength="200" />
               <p class="field-error" id="err-features">Vyber prosím alespoň jednu možnost.</p>
@@ -308,7 +307,6 @@
   <script>
     // ====== CONFIG ======
     const ENDPOINT_URL = ""; // sem přijde /exec URL Google Apps Scriptu
-    const MAX_FEATURES = 3;
     const TOTAL_STEPS = 3;
 
     const FEATURES = [
@@ -338,18 +336,10 @@
     });
 
     const boxes = Array.from(featuresEl.querySelectorAll('input[type="checkbox"]'));
-    const countEl = document.getElementById('count');
     const otherInput = document.getElementById('other-text');
 
     function refreshFeatures() {
-      const checked = boxes.filter(b => b.checked);
-      countEl.textContent = checked.length;
-      boxes.forEach(b => {
-        const opt = b.closest('.opt');
-        opt.classList.toggle('selected', b.checked);
-        if (!b.checked && checked.length >= MAX_FEATURES) { b.disabled = true; opt.classList.add('disabled'); }
-        else { b.disabled = false; opt.classList.remove('disabled'); }
-      });
+      boxes.forEach(b => b.closest('.opt').classList.toggle('selected', b.checked));
       const other = boxes.find(b => b.dataset.other);
       otherInput.classList.toggle('show', other && other.checked);
       if (!(other && other.checked)) otherInput.value = '';
@@ -374,13 +364,20 @@
     const progressFill = document.getElementById('progress-fill');
     const stepNum = document.getElementById('step-num');
 
-    function goTo(step) {
+    function goTo(step, scroll) {
       current = step;
       steps.forEach(s => s.classList.toggle('active', Number(s.dataset.step) === step));
       progressFill.style.width = (step / TOTAL_STEPS * 100) + '%';
       stepNum.textContent = step;
-      document.getElementById('card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (scroll !== false) document.getElementById('card').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+
+    // Úvodní obrazovka → první otázka
+    document.getElementById('start-btn').addEventListener('click', () => {
+      document.getElementById('intro').style.display = 'none';
+      document.getElementById('formular').style.display = 'block';
+      goTo(1);
+    });
 
     function validateStep(step) {
       if (step === 1) {
@@ -448,7 +445,7 @@
     });
 
     refreshFeatures();
-    goTo(1);
+    goTo(1, false);
   </script>
 </body>
 </html>
