@@ -88,7 +88,7 @@
     .btn:active { transform: translateY(0); }
     .btn:disabled { opacity: 0.45; cursor: default; transform: none; box-shadow: none; }
     .hero .btn { margin-top: 12px; }
-    .sparkle { display: inline-block; vertical-align: middle; margin-right: 8px; }
+    .cta-note { font-size: 14px; color: var(--muted); margin-top: 14px; }
 
     .btn-ghost {
       background: transparent; color: var(--green-muted);
@@ -216,10 +216,8 @@
       <p>Pracujeme na nové aplikaci, která ti umožní mít vlastní knihovnu vždy po ruce.</p>
       <p>Než ji zpřístupníme všem, chceme ji vytvořit společně s lidmi, kteří budou aplikaci opravdu používat.</p>
       <p>Pokud se přidáš na waitlist, získáš přístup mezi prvními a budeš nám pomáhat rozhodovat, co v aplikaci funguje, co chybí a co naopak nemá smysl.</p>
-      <button type="button" id="start-btn" class="btn">
-        <svg class="sparkle" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l1.6 6.4L20 10l-6.4 1.6L12 18l-1.6-6.4L4 10l6.4-1.6L12 2z" fill="#F8DF8B"/></svg>
-        Přidat se na waitlist
-      </button>
+      <button type="button" id="start-btn" class="btn">Přidat se na waitlist</button>
+      <p class="cta-note">Zabere to pouze 30 s</p>
     </div>
   </section>
 
@@ -311,13 +309,13 @@
 
     const FEATURES = [
       "Přehled všech mých knih na jednom místě",
-      "Správa a organizace knihovny",
-      "Kolik stojí jednotlivé knihy",
+      "Správa a organizace mojí knihovny",
+      "Kolik stojí jednotlivé knihy, které vlastním",
       "Celková hodnota mojí knihovny",
-      "Možnost tvořit si wishlisty a seznamy pomocí naskenování knihy",
+      "Možnost tvořit si vlastní wishlisty a tématické seznamy",
       "Rychlejší prodej knih přes Knihobot",
       "Přehled o knihách, které jsem prodal(a)",
-      "Statistiky mojí knihovny a čtení",
+      "Statistiky mojí knihovny",
       "jiné"
     ];
 
