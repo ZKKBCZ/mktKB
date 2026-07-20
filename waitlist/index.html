@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Waitlist – Knihobot aplikace</title>
+  <meta name="description" content="Přidej se na waitlist a pomoz nám vytvořit nejlepší aplikaci pro milovníky knih." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green: #264D39;
+      --green-text: #324c3f;
+      --green-muted: #507A65;
+      --tint-1: #EFF4F1;
+      --tint-2: #DFEAE5;
+      --tint-3: #D0E0D8;
+      --cream: #FEFAEB;
+      --yellow: #F8DF8B;
+      --yellow-text: #1F0D03;
+      --coral: #EC5151;
+      --body: #313533;
+      --body-2: #49504D;
+      --muted: #6E7873;
+      --radius-btn: 4px;
+      --radius-card: 8px;
+      --radius-pill: 24px;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      color: var(--body);
+      background: var(--cream);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+    /* ---------- Header ---------- */
+    header {
+      padding: 28px 0 8px;
+      text-align: center;
+    }
+    .logo {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 22px;
+      color: var(--green);
+      letter-spacing: 0.5px;
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      text-align: center;
+      padding: 40px 0 56px;
+    }
+    .badge {
+      display: inline-block;
+      background: var(--tint-2);
+      color: var(--green);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      padding: 7px 16px;
+      border-radius: var(--radius-pill);
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: clamp(30px, 6vw, 46px);
+      line-height: 1.15;
+      color: var(--green);
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+    .hero .lead {
+      font-size: clamp(17px, 2.6vw, 20px);
+      font-weight: 600;
+      color: var(--green-text);
+      max-width: 560px;
+      margin: 0 auto 24px;
+    }
+    .hero p {
+      font-size: 16px;
+      color: var(--body-2);
+      max-width: 560px;
+      margin: 0 auto 14px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--green);
+      color: #fff;
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 16px;
+      border: none;
+      border-radius: var(--radius-btn);
+      padding: 16px 32px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.12s ease, background 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 14px rgba(38, 77, 57, 0.18);
+    }
+    .btn:hover { background: #1d3c2d; transform: translateY(-1px); box-shadow: 0 6px 18px rgba(38,77,57,0.25); }
+    .btn:active { transform: translateY(0); }
+    .hero .btn { margin-top: 12px; }
+
+    .sparkle { display: inline-block; vertical-align: middle; margin: 0 6px; }
+
+    /* ---------- Form card ---------- */
+    .form-section { padding-bottom: 80px; }
+    .card {
+      background: #fff;
+      border: 1px solid var(--tint-2);
+      border-radius: var(--radius-card);
+      padding: clamp(24px, 5vw, 48px);
+      box-shadow: 0 10px 40px rgba(38, 77, 57, 0.07);
+    }
+    .card > h2 {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 28px;
+      color: var(--green);
+      margin-bottom: 8px;
+    }
+    .card > .sub {
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 36px;
+    }
+
+    fieldset { border: none; margin-bottom: 40px; }
+    fieldset:last-of-type { margin-bottom: 24px; }
+    legend {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 20px;
+      color: var(--green-text);
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+    .hint { font-size: 14px; color: var(--muted); margin-bottom: 18px; }
+    .hint .count { font-weight: 700; color: var(--green); }
+
+    /* option rows */
+    .opt {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border: 1.5px solid var(--tint-2);
+      border-radius: var(--radius-btn);
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: border-color 0.15s ease, background 0.15s ease;
+      user-select: none;
+    }
+    .opt:hover { border-color: var(--tint-3); background: var(--tint-1); }
+    .opt input { position: absolute; opacity: 0; width: 0; height: 0; }
+    .box {
+      flex: 0 0 auto;
+      width: 22px; height: 22px;
+      border: 2px solid var(--green-muted);
+      border-radius: 5px;
+      display: grid; place-items: center;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+    .box.radio { border-radius: 50%; }
+    .box svg { width: 13px; height: 13px; opacity: 0; transform: scale(0.6); transition: opacity 0.12s, transform 0.12s; }
+    .opt input:checked ~ .box { background: var(--green); border-color: var(--green); }
+    .opt input:checked ~ .box svg { opacity: 1; transform: scale(1); }
+    .opt input:checked ~ .label-txt { color: var(--green-text); font-weight: 600; }
+    .opt input:focus-visible ~ .box { box-shadow: 0 0 0 3px rgba(38,77,57,0.25); }
+    .opt.selected { border-color: var(--green); background: var(--tint-1); }
+    .opt.disabled { opacity: 0.45; cursor: not-allowed; }
+    .label-txt { font-size: 16px; color: var(--body); }
+
+    .radio-dot { width: 9px; height: 9px; border-radius: 50%; background: #fff; opacity: 0; transform: scale(0.4); transition: opacity 0.12s, transform 0.12s; }
+    .opt input:checked ~ .box .radio-dot { opacity: 1; transform: scale(1); }
+
+    .other-input {
+      display: none;
+      width: 100%;
+      margin-top: 2px; margin-bottom: 10px;
+    }
+    .other-input.show { display: block; }
+
+    input[type="email"], input[type="text"] {
+      width: 100%;
+      font-family: var(--sans);
+      font-size: 16px;
+      color: var(--body);
+      background: var(--cream);
+      border: 1.5px solid var(--tint-2);
+      border-radius: var(--radius-btn);
+      padding: 14px 16px;
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+    input[type="email"]:focus, input[type="text"]:focus {
+      outline: none;
+      border-color: var(--green);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(38,77,57,0.10);
+    }
+    input::placeholder { color: #9aa39e; }
+
+    .field-error { color: var(--coral); font-size: 14px; margin-top: 8px; display: none; font-weight: 600; }
+    .field-error.show { display: block; }
+
+    .submit-btn { width: 100%; margin-top: 8px; font-size: 17px; padding: 18px; }
+    .submit-btn:disabled { opacity: 0.6; cursor: default; transform: none; box-shadow: none; }
+
+    /* ---------- Success ---------- */
+    .success {
+      display: none;
+      text-align: center;
+      padding: clamp(30px, 6vw, 56px);
+    }
+    .success.show { display: block; }
+    .success .mark {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: var(--tint-2);
+      display: grid; place-items: center;
+      margin: 0 auto 24px;
+    }
+    .success h2 { font-family: var(--serif); font-weight: 700; font-size: 30px; color: var(--green); margin-bottom: 12px; }
+    .success p { color: var(--body-2); font-size: 17px; max-width: 420px; margin: 0 auto; }
+
+    footer { text-align: center; padding: 32px 0 48px; color: var(--muted); font-size: 13px; }
+
+    @media (max-width: 520px) {
+      .hero { padding: 28px 0 40px; }
+      .label-txt { font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="logo">Knihobot</div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <span class="badge">Nová aplikace · Waitlist</span>
+      <h1>Pomoz nám vytvořit nejlepší aplikaci pro milovníky knih</h1>
+      <p class="lead">Spravuj svoji knihovnu, sleduj hodnotu knih a prodávej je jednoduše přes Knihobot.</p>
+      <p>Pracujeme na nové aplikaci, která ti umožní mít vlastní knihovnu vždy po ruce.</p>
+      <p>Než ji zpřístupníme všem, chceme ji vytvořit společně s lidmi, kteří budou aplikaci opravdu používat.</p>
+      <p>Pokud se přidáš na waitlist, získáš přístup mezi prvními a budeš nám pomáhat rozhodovat, co v aplikaci funguje, co chybí a co naopak nemá smysl.</p>
+      <a href="#formular" class="btn">
+        <svg class="sparkle" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l1.6 6.4L20 10l-6.4 1.6L12 18l-1.6-6.4L4 10l6.4-1.6L12 2z" fill="#F8DF8B"/></svg>
+        Přidat se na waitlist
+      </a>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section class="form-section" id="formular">
+    <div class="wrap">
+      <div class="card" id="card">
+        <h2>Přidej se na waitlist</h2>
+        <p class="sub">Pár otázek nám pomůže postavit aplikaci přesně pro tebe.</p>
+
+        <form id="waitlist-form" novalidate>
+          <!-- Q1 -->
+          <fieldset>
+            <legend>Co by tě na takové aplikaci lákalo nejvíc?</legend>
+            <p class="hint">Vyber maximálně 3. Vybráno: <span class="count" id="count">0</span>/3</p>
+            <div id="features">
+              <!-- options injected by JS -->
+            </div>
+            <input type="text" class="other-input" id="other-text" name="other-text" placeholder="Napiš, co jiného by tě lákalo…" maxlength="200" />
+            <p class="field-error" id="err-features">Vyber prosím alespoň jednu možnost.</p>
+          </fieldset>
+
+          <!-- Q2 -->
+          <fieldset>
+            <legend>Kam ti máme poslat pozvánku?</legend>
+            <p class="hint">Zadej e-mail, na který ti dáme vědět, až bude aplikace připravená.</p>
+            <input type="email" id="email" name="email" placeholder="tvuj@email.cz" autocomplete="email" required />
+            <p class="field-error" id="err-email">Zadej prosím platný e-mail.</p>
+          </fieldset>
+
+          <!-- Q3 -->
+          <fieldset>
+            <legend>Jaký telefon používáš?</legend>
+            <div id="phone">
+              <label class="opt">
+                <input type="radio" name="phone" value="iOS (iPhone)" />
+                <span class="box radio"><span class="radio-dot"></span></span>
+                <span class="label-txt">iOS (iPhone)</span>
+              </label>
+              <label class="opt">
+                <input type="radio" name="phone" value="Android" />
+                <span class="box radio"><span class="radio-dot"></span></span>
+                <span class="label-txt">Android</span>
+              </label>
+            </div>
+            <p class="field-error" id="err-phone">Vyber prosím jednu možnost.</p>
+          </fieldset>
+
+          <button type="submit" class="btn submit-btn" id="submit-btn">Přidat se na waitlist</button>
+          <p class="field-error" id="err-submit" style="text-align:center;">Něco se nepovedlo. Zkus to prosím znovu.</p>
+        </form>
+      </div>
+
+      <!-- Success state -->
+      <div class="card success" id="success">
+        <div class="mark">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="#264D39" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h2>Jsi na waitlistu! 🎉</h2>
+        <p>Díky, že nám pomůžeš aplikaci vytvořit. Ozveme se ti na e-mail, jakmile budeme mít co ukázat.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">© Knihobot · Děkujeme, že jsi součástí vývoje.</div>
+  </footer>
+
+  <script>
+    // ====== CONFIG ======
+    // Sem přijde URL Google Apps Script web appu (doplníme, až bude sheet).
+    const ENDPOINT_URL = "";
+    const MAX_FEATURES = 3;
+
+    const FEATURES = [
+      "Přehled všech mých knih na jednom místě",
+      "Správa a organizace knihovny",
+      "Kolik stojí jednotlivé knihy",
+      "Celková hodnota mojí knihovny",
+      "Možnost tvořit si wishlisty a seznamy pomocí naskenování knihy",
+      "Rychlejší prodej knih přes Knihobot",
+      "Přehled o knihách, které jsem prodal(a)",
+      "Statistiky mojí knihovny a čtení",
+      "jiné"
+    ];
+
+    const checkSvg = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+    // Build feature checkboxes
+    const featuresEl = document.getElementById('features');
+    FEATURES.forEach((f, i) => {
+      const label = document.createElement('label');
+      label.className = 'opt';
+      label.innerHTML =
+        '<input type="checkbox" name="feature" value="' + f.replace(/"/g, '&quot;') + '"' + (f === 'jiné' ? ' data-other="1"' : '') + ' />' +
+        '<span class="box">' + checkSvg + '</span>' +
+        '<span class="label-txt">' + f + '</span>';
+      featuresEl.appendChild(label);
+    });
+
+    const boxes = Array.from(featuresEl.querySelectorAll('input[type="checkbox"]'));
+    const opts = Array.from(featuresEl.querySelectorAll('.opt'));
+    const countEl = document.getElementById('count');
+    const otherInput = document.getElementById('other-text');
+
+    function refresh() {
+      const checked = boxes.filter(b => b.checked);
+      countEl.textContent = checked.length;
+      boxes.forEach(b => {
+        const opt = b.closest('.opt');
+        opt.classList.toggle('selected', b.checked);
+        if (!b.checked && checked.length >= MAX_FEATURES) {
+          b.disabled = true; opt.classList.add('disabled');
+        } else {
+          b.disabled = false; opt.classList.remove('disabled');
+        }
+      });
+      const other = boxes.find(b => b.dataset.other);
+      otherInput.classList.toggle('show', other && other.checked);
+      if (!(other && other.checked)) otherInput.value = '';
+    }
+    boxes.forEach(b => b.addEventListener('change', () => { refresh(); hide('err-features'); }));
+
+    // Radio styling helper
+    document.querySelectorAll('#phone .opt input').forEach(r => {
+      r.addEventListener('change', () => {
+        document.querySelectorAll('#phone .opt').forEach(o => o.classList.remove('selected'));
+        if (r.checked) r.closest('.opt').classList.add('selected');
+        hide('err-phone');
+      });
+    });
+    document.getElementById('email').addEventListener('input', () => hide('err-email'));
+
+    function show(id) { document.getElementById(id).classList.add('show'); }
+    function hide(id) { document.getElementById(id).classList.remove('show'); }
+
+    const form = document.getElementById('waitlist-form');
+    const submitBtn = document.getElementById('submit-btn');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hide('err-submit');
+
+      const selected = boxes.filter(b => b.checked).map(b => b.value);
+      const email = document.getElementById('email').value.trim();
+      const phone = (document.querySelector('input[name="phone"]:checked') || {}).value || '';
+      const otherText = otherInput.value.trim();
+
+      let ok = true;
+      if (selected.length === 0) { show('err-features'); ok = false; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { show('err-email'); ok = false; }
+      if (!phone) { show('err-phone'); ok = false; }
+      if (!ok) { document.querySelector('.field-error.show').scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+
+      // Build "jiné" value with the free text
+      const features = selected.map(v => v === 'jiné' ? ('jiné: ' + otherText) : v);
+
+      const payload = {
+        email: email,
+        phone: phone,
+        features: features.join(' | '),
+        other: otherText,
+        submittedAt: new Date().toISOString(),
+        userAgent: navigator.userAgent
+      };
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Odesílám…';
+
+      try {
+        if (!ENDPOINT_URL) {
+          // Endpoint zatím nenastaven – zobrazíme úspěch (demo režim)
+          console.warn('ENDPOINT_URL není nastaven. Payload:', payload);
+        } else {
+          await fetch(ENDPOINT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(payload)
+          });
+        }
+        document.getElementById('card').style.display = 'none';
+        show('success');
+        document.getElementById('success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } catch (err) {
+        console.error(err);
+        show('err-submit');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Přidat se na waitlist';
+      }
+    });
+
+    refresh();
+  </script>
+</body>
+</html>
