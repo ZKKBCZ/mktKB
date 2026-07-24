@@ -1,18 +1,22 @@
 /**
  * Knihobot – waitlist aplikace
- * Google Apps Script: zapíše odpovědi z formuláře do Google Sheetu.
+ * Google Apps Script: každé odeslání = jeden řádek, každá otázka = jeden sloupec.
  *
  * NASAZENÍ:
  * 1. Cílový Google Sheet → menu Rozšíření → Apps Script.
- * 2. Smaž ukázkový kód a vlož tenhle soubor.
+ * 2. Smaž ukázkový kód a vlož tenhle soubor. Ulož (ikona diskety).
  * 3. Nasadit (Deploy) → Nové nasazení → typ „Webová aplikace".
  *    - Spustit jako: Já (tvůj účet)
  *    - Kdo má přístup: Kdokoli (Anyone)
- * 4. Zkopíruj „URL webové aplikace" (končí na /exec) a pošli ji –
+ * 4. Autorizuj (u „Google toto neověřil" → Rozšířené → Přejít na projekt).
+ * 5. Zkopíruj „URL webové aplikace" (končí na /exec) a pošli ji –
  *    doplní se do index.html jako ENDPOINT_URL.
  */
 
-var SHEET_NAME = 'Waitlist';   // název listu, kam se zapisuje
+var SHEET_NAME = 'Waitlist';
+
+// Pořadí a názvy sloupců = pořadí otázek ve formuláři.
+var HEADERS = ['Čas', 'Co by tě na aplikaci lákalo nejvíc', 'E-mail', 'Telefon'];
 
 function doPost(e) {
   try {
@@ -22,16 +26,15 @@ function doPost(e) {
 
     // Hlavička při prvním zápisu
     if (sheet.getLastRow() === 0) {
-      sheet.appendRow(['Čas', 'E-mail', 'Telefon', 'Co ho láká', 'Jiné', 'User agent']);
+      sheet.appendRow(HEADERS);
     }
 
+    // Jeden řádek na jedno vyplnění; každá otázka jedna buňka.
     sheet.appendRow([
-      new Date(),
-      data.email || '',
-      data.phone || '',
-      data.features || '',
-      data.other || '',
-      data.userAgent || ''
+      new Date(),            // Čas
+      data.features || '',   // Q1 – všechny zaškrtnuté možnosti (vč. "jiné: …")
+      data.email || '',      // Q2 – e-mail
+      data.phone || ''       // Q3 – telefon
     ]);
 
     return ContentService

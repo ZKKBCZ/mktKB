@@ -308,7 +308,7 @@
 
   <script>
     // ====== CONFIG ======
-    const ENDPOINT_URL = ""; // sem přijde /exec URL Google Apps Scriptu
+    const ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbxg02EWhOWCd7RY_jo2zrZsQY18pURWQavXZqCb6iy5dV7u_M0_HFpaTwnEP27YiXycdQ/exec";
     const TOTAL_STEPS = 3;
 
     const FEATURES = [
@@ -433,6 +433,7 @@
         } else {
           await fetch(ENDPOINT_URL, {
             method: 'POST',
+            mode: 'no-cors',
             headers: { 'Content-Type': 'text/plain;charset=utf-8' },
             body: JSON.stringify(payload)
           });
